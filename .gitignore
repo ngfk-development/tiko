@@ -1,0 +1,17 @@
+# Rust
+backend/target
+
+# NodeJS
+frontend/**/.vite
+frontend/**/dist
+frontend/**/node_modules
+frontend/**/*storybook.log
+frontend/**/storybook-static
+
+# Devenv
+.devenv*
+devenv.local.nix
+devenv.local.yaml
+
+# Direnv
+.direnv

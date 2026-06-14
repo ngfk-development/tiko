@@ -1,0 +1,4 @@
+@source '../../core/src';
+
+@import '@tiko/core/index.css';
+@import '@xyflow/react/dist/style.css';

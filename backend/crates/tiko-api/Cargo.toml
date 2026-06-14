@@ -1,0 +1,23 @@
+[package]
+name = "tiko-api"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+async-graphql = { version = "7.2.1", features = ["chrono", "dataloader", "uuid"] }
+async-graphql-axum = "7.2.1"
+axum = "0.8.9"
+axum-extra = { version = "0.12.6", features = ["cookie"] }
+chrono = { workspace = true }
+jsonwebtoken = { version = "10.4.0", features = ["rust_crypto"] }
+reqwest = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+sqlx = { workspace = true }
+thiserror = { workspace = true }
+tiko-database = { path = "../tiko-database" }
+tiko-providers = { path = "../tiko-providers" }
+time = "0.3.49"
+tokio = { workspace = true }
+tracing = { workspace = true }
+uuid = { workspace = true }

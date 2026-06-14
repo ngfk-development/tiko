@@ -1,0 +1,266 @@
+enum AuthMode {
+	json
+	cookie
+}
+
+enum AuthType {
+	personal_access_token
+	oauth2
+}
+
+input CreateSyncMappingInput {
+	integrationId: UUID!
+	entity: SyncEntity!
+	trigger: SyncTrigger!
+	timeEntryRead: TimeEntryReadMappingInput
+	customFieldRead: CustomFieldReadMappingInput
+}
+
+type CustomField {
+	id: UUID!
+	name: String!
+	description: String
+	icon: String!
+	position: Int!
+}
+
+input CustomFieldLinkInput {
+	customFieldId: UUID!
+	entity: SyncEntity!
+	externalIdField: String!
+}
+
+input CustomFieldReadMappingInput {
+	customFieldId: UUID!
+	label: String
+	key: String
+	metadata: [MetadataEntryInput!]! = []
+}
+
+type CustomFieldValue {
+	id: UUID!
+	label: String!
+	key: String
+	metadata: JSON!
+	createdAt: DateTime!
+	updatedAt: DateTime!
+}
+
+"""
+Implement the DateTime<Utc> scalar
+
+The input/output is a string in RFC3339 format.
+"""
+scalar DateTime
+
+type EntityFields {
+	entity: SyncEntity!
+	isTimeEntry: Boolean!
+	fields: [Field!]!
+}
+
+type Field {
+	key: String!
+	fieldType: FieldType!
+	example: String!
+}
+
+enum FieldType {
+	string
+	number
+	boolean
+	date
+	date_time
+}
+
+type Integration {
+	id: UUID!
+	provider: Provider!
+	authType: AuthType!
+	createdAt: DateTime!
+	updatedAt: DateTime!
+}
+
+type IntegrationProvider {
+	provider: Provider!
+	status: IntegrationStatus!
+	connectUrl: String
+	integrations: [Integration!]!
+}
+
+enum IntegrationStatus {
+	connected
+	disconnected
+	coming_soon
+}
+
+type IntegrationsAgg {
+	total: Int!
+}
+
+"""
+A scalar that can represent any JSON value.
+"""
+scalar JSON
+
+type Me {
+	id: UUID!
+	email: String!
+	firstName: String!
+	lastName: String!
+	admin: Boolean!
+}
+
+input MetadataEntryInput {
+	key: String!
+	template: String!
+}
+
+type Mutation {
+	authLogin(email: String!, password: String!, mode: AuthMode! = cookie): TokenResponse!
+	authLogout(refreshToken: String): Boolean!
+	authRefresh(refreshToken: String, mode: AuthMode! = cookie): TokenResponse!
+	deleteIntegration(id: UUID!): Integration
+	createSyncMapping(input: CreateSyncMappingInput!): SyncMapping!
+}
+
+enum Provider {
+	harvest
+	moneybird
+	simplicate
+}
+
+type Query {
+	live: Boolean!
+	me: Me!
+	customField(id: UUID!): CustomField
+	customFields: [CustomField!]!
+	customFieldValues(customFieldId: UUID!): [CustomFieldValue!]!
+	integrationProviders(provider: Provider, status: IntegrationStatus): [IntegrationProvider!]!
+	integrations(provider: Provider): [Integration!]!
+	syncMappings(provider: Provider): [SyncMapping!]!
+	entityFields(provider: Provider!): [EntityFields!]!
+	syncRecords(provider: Provider, page: Int! = 1, perPage: Int! = 20): [SyncRecord!]!
+	syncRecordsAgg(provider: Provider): SyncRecordsAgg!
+	user(id: UUID!): User
+	users(page: Int! = 1, perPage: Int! = 20): [User!]!
+	usersAgg: UsersAgg!
+}
+
+enum SyncDirection {
+	read
+	write
+}
+
+enum SyncEntity {
+	harvest_time_entry
+	harvest_project
+	harvest_task
+	harvest_client
+}
+
+type SyncMapping {
+	id: UUID!
+	integrationId: UUID!
+	direction: SyncDirection!
+	entity: SyncEntity!
+	trigger: SyncTrigger!
+	active: Boolean!
+	lastSyncedAt: DateTime
+	createdAt: DateTime!
+	updatedAt: DateTime!
+	integration: Integration
+}
+
+type SyncRecord {
+	id: UUID!
+	entity: SyncEntity!
+	externalId: String
+	integrationId: UUID!
+	timeEntryId: UUID
+	createdAt: DateTime!
+	updatedAt: DateTime!
+	integration: Integration
+	timeEntry: TimeEntry
+}
+
+type SyncRecordsAgg {
+	total: Int!
+}
+
+enum SyncTrigger {
+	automatic
+	cron
+	manual
+}
+
+input TemplateWithFormatInput {
+	template: String!
+	format: String!
+}
+
+type TimeEntry {
+	id: UUID!
+	timeStarted: DateTime!
+	timeEnded: DateTime
+	description: String
+	billable: Boolean!
+	createdAt: DateTime!
+	updatedAt: DateTime!
+}
+
+input TimeEntryReadMappingInput {
+	startedAt: TemplateWithFormatInput!
+	endedAt: TemplateWithFormatInput
+	description: String
+	billable: String
+	customFieldLinks: [CustomFieldLinkInput!]! = []
+}
+
+type TokenResponse {
+	accessToken: String!
+	refreshToken: String
+}
+
+"""
+A UUID is a unique 128-bit number, stored as 16 octets. UUIDs are parsed as
+Strings within GraphQL. UUIDs are used to assign unique identifiers to
+entities without requiring a central allocating authority.
+
+# References
+
+* [Wikipedia: Universally Unique Identifier](http://en.wikipedia.org/wiki/Universally_unique_identifier)
+* [RFC4122: A Universally Unique Identifier (UUID) URN Namespace](http://tools.ietf.org/html/rfc4122)
+"""
+scalar UUID
+
+type User {
+	id: UUID!
+	email: String!
+	verified: Boolean!
+	firstName: String!
+	lastName: String!
+	integrations: [Integration!]!
+	integrationsAgg: IntegrationsAgg!
+}
+
+type UsersAgg {
+	total: Int!
+}
+
+"""
+Directs the executor to include this field or fragment only when the `if` argument is true.
+"""
+directive @include(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
+"""
+Directs the executor to skip this field or fragment when the `if` argument is true.
+"""
+directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
+"""
+Provides a scalar specification URL for specifying the behavior of custom scalar types.
+"""
+directive @specifiedBy(url: String!) on SCALAR
+schema {
+	query: Query
+	mutation: Mutation
+}

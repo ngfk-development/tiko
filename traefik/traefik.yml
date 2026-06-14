@@ -1,0 +1,15 @@
+entryPoints:
+  web:
+    address: ":3000"
+
+providers:
+  file:
+    filename: dynamic.yml
+    watch: true
+
+api:
+  dashboard: true
+  basePath: /dev/traefik
+
+ping:
+  entryPoint: web

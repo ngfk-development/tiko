@@ -1,0 +1,18 @@
+[package]
+name = "tiko-providers"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+async-trait = "0.1"
+bon = "3.9.3"
+chrono = { workspace = true }
+oauth2 = "5.0.0"
+reqwest = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+serde_path_to_error = { workspace = true }
+thiserror = { workspace = true }
+tiko-database = { path = "../tiko-database" }
+tokio = { workspace = true }
+tracing = { workspace = true }

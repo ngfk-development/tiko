@@ -1,0 +1,97 @@
+{
+  "load_direnv": "direct",
+  "languages": {
+    "CSS": {
+      "language_servers": [
+        "tailwindcss-intellisense-css",
+        "!vscode-css-language-server",
+      ],
+    },
+    "TypeScript": {
+      "formatter": {
+        "external": {
+          "command": "pnpm",
+          "arguments": [
+            "--dir",
+            "frontend",
+            "exec",
+            "prettier",
+            "--stdin-filepath",
+            "{buffer_path}",
+          ],
+        },
+      },
+    },
+    "TSX": {
+      "formatter": {
+        "external": {
+          "command": "pnpm",
+          "arguments": [
+            "--dir",
+            "frontend",
+            "exec",
+            "prettier",
+            "--stdin-filepath",
+            "{buffer_path}",
+          ],
+        },
+      },
+    },
+    "JavaScript": {
+      "formatter": {
+        "external": {
+          "command": "pnpm",
+          "arguments": [
+            "--dir",
+            "frontend",
+            "exec",
+            "prettier",
+            "--stdin-filepath",
+            "{buffer_path}",
+          ],
+        },
+      },
+    },
+    "JSON": {
+      "formatter": {
+        "external": {
+          "command": "pnpm",
+          "arguments": [
+            "--dir",
+            "frontend",
+            "exec",
+            "prettier",
+            "--stdin-filepath",
+            "{buffer_path}",
+          ],
+        },
+      },
+    },
+  },
+  "lsp": {
+    "vtsls": {
+      "settings": {
+        "typescript": {
+          "preferences": {
+            "importModuleSpecifier": "non-relative",
+          },
+        },
+        "vtsls": {
+          "typescript": {
+            "globalTsdk": "frontend/node_modules/typescript/lib",
+          },
+        },
+      },
+    },
+    "nil": {
+      "binary": {
+        "path": "nixd",
+      },
+    },
+    "rust-analyzer": {
+      "binary": {
+        "path": "rust-analyzer",
+      },
+    },
+  },
+}

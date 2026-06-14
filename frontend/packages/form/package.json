@@ -1,0 +1,44 @@
+{
+  "name": "@tiko/form",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "imports": {
+    "#/*": {
+      "types": "./src/*",
+      "default": "./src/*"
+    }
+  },
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc -b && vite build"
+  },
+  "dependencies": {
+    "@tanstack/react-form": "^1.33.0"
+  },
+  "devDependencies": {
+    "@base-ui/react": "catalog:",
+    "@storybook/react-vite": "catalog:",
+    "@tailwindcss/vite": "catalog:",
+    "@tiko/core": "workspace:*",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@vitejs/plugin-react-swc": "catalog:",
+    "lucide-react": "catalog:",
+    "react": "catalog:",
+    "tailwindcss": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:"
+  },
+  "peerDependencies": {
+    "@base-ui/react": "catalog:",
+    "@tiko/core": "workspace:*",
+    "lucide-react": "catalog:",
+    "react": "catalog:"
+  }
+}

@@ -1,0 +1,49 @@
+http:
+  routers:
+    traefik-dashboard:
+      rule: "PathPrefix(`/dev/traefik`)"
+      service: api@internal
+      priority: 20
+
+    graphql:
+      rule: "PathPrefix(`/graphql`)"
+      service: tiko-api
+      priority: 10
+
+    oauth:
+      rule: "PathPrefix(`/oauth`)"
+      service: tiko-api
+      priority: 10
+
+    live:
+      rule: "PathPrefix(`/live`)"
+      service: ping@internal
+      priority: 10
+
+    root-redirect:
+      rule: "Path(`/`) && !Header(`Upgrade`, `websocket`)"
+      service: app
+      middlewares:
+        - redirect-to-app
+      priority: 5
+
+    app:
+      rule: "PathPrefix(`/`)"
+      service: app
+      priority: 1
+
+  middlewares:
+    redirect-to-app:
+      redirectRegex:
+        regex: "^(https?://[^/]+)/$"
+        replacement: "${1}/app/"
+
+  services:
+    tiko-api:
+      loadBalancer:
+        servers:
+          - url: "http://localhost:4000"
+    app:
+      loadBalancer:
+        servers:
+          - url: "http://localhost:5173"
