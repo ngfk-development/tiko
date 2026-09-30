@@ -1,0 +1,10 @@
+{
+  "load_direnv": "direct",
+  "lsp": {
+    "nil": {
+      "binary": {
+        "path": "nixd",
+      },
+    },
+  },
+}
