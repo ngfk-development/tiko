@@ -1,0 +1,22 @@
+{
+  "name": "@tiko/server",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "dev": "node --watch src/index.ts",
+    "start": "NODE_ENV=production node dist/index.js",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@hono/node-server": "^2.1.3",
+    "hono": "^4.13.12",
+    "pino": "^10.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "pino-pretty": "^13.1.3",
+    "typescript": "catalog:"
+  }
+}

@@ -3,7 +3,7 @@
   "type": "module",
   "scripts": {
     "build": "pnpm run -r --stream build",
-    "dev": "pnpm --dir packages/tiko-client run dev",
+    "dev": "pnpm run -r --parallel dev",
     "format": "pnpm run --sequential --no-bail \"/^format:.*/\"",
     "format:oxlint": "oxlint --fix .",
     "format:package": "sort-package-json {package.json,packages/*/package.json}",
@@ -11,7 +11,8 @@
     "lint": "pnpm run --sequential --no-bail \"/^lint:.*/\"",
     "lint:oxlint": "oxlint .",
     "lint:package": "sort-package-json -c {package.json,packages/*/package.json}",
-    "lint:prettier": "prettier -c ."
+    "lint:prettier": "prettier -c .",
+    "lint:types": "pnpm run -r --stream typecheck"
   },
   "prettier": {
     "importOrder": [
@@ -42,7 +43,7 @@
   },
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^4.7.1",
-    "oxlint": "^1.81.0",
+    "oxlint": "^1.86.0",
     "oxlint-tsgolint": "^7.0.2003",
     "prettier": "^3.9.6",
     "prettier-plugin-tailwindcss": "^0.8.1",
