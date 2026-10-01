@@ -1,0 +1,58 @@
+{
+  "name": "tiko",
+  "type": "module",
+  "scripts": {
+    "build": "pnpm run -r --stream build",
+    "dev": "pnpm --dir packages/tiko-client run dev",
+    "format": "pnpm run --sequential --no-bail \"/^format:.*/\"",
+    "format:oxlint": "oxlint --fix .",
+    "format:package": "sort-package-json {package.json,packages/*/package.json}",
+    "format:prettier": "prettier -w .",
+    "lint": "pnpm run --sequential --no-bail \"/^lint:.*/\"",
+    "lint:oxlint": "oxlint .",
+    "lint:package": "sort-package-json -c {package.json,packages/*/package.json}",
+    "lint:prettier": "prettier -c ."
+  },
+  "prettier": {
+    "importOrder": [
+      "<BUILTIN_MODULES>",
+      "",
+      "<THIRD_PARTY_MODULES>",
+      "",
+      "^#generated(/.*)?$",
+      "^#/(.*)$",
+      "^[./]"
+    ],
+    "plugins": [
+      "@ianvs/prettier-plugin-sort-imports",
+      "prettier-plugin-tailwindcss"
+    ],
+    "singleQuote": true,
+    "overrides": [
+      {
+        "files": [
+          "tsconfig*.json",
+          ".zed/*.json"
+        ],
+        "options": {
+          "parser": "jsonc"
+        }
+      }
+    ]
+  },
+  "devDependencies": {
+    "@ianvs/prettier-plugin-sort-imports": "^4.7.1",
+    "oxlint": "^1.81.0",
+    "oxlint-tsgolint": "^7.0.2003",
+    "prettier": "^3.9.6",
+    "prettier-plugin-tailwindcss": "^0.8.1",
+    "sort-package-json": "^4.0.0",
+    "typescript": "catalog:"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "12.8.1"
+    }
+  }
+}
