@@ -53,6 +53,22 @@
         initial_delay = 2;
       };
     };
+
+    storybook = {
+      cwd = "${config.devenv.root}/packages/tiko-storybook";
+      exec = "pnpm run dev --ci";
+      after = [ "tiko:install" ];
+      env.FORCE_COLOR = "1";
+      restart.on = "never";
+      ready = {
+        http.get = {
+          host = "localhost";
+          port = 6006;
+          path = "/";
+        };
+        initial_delay = 5;
+      };
+    };
   };
 
   scripts = {

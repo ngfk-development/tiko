@@ -1,6 +1,7 @@
 # NodeJS
 dist
 node_modules
+storybook-static
 
 # Devenv
 .devenv*
