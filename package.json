@@ -50,10 +50,5 @@
     "sort-package-json": "^4.0.0",
     "typescript": "catalog:"
   },
-  "devEngines": {
-    "packageManager": {
-      "name": "pnpm",
-      "version": "12.8.1"
-    }
-  }
+  "packageManager": "pnpm@12.8.1"
 }

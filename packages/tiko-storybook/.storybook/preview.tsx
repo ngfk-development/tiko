@@ -1,6 +1,6 @@
 import type { Preview } from '@storybook/react-vite';
 
-import './preview.css';
+import '@tiko/ui/index.css';
 
 const preview: Preview = {
   parameters: {

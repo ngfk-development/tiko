@@ -5,12 +5,14 @@ allowBuilds:
   esbuild: true
 
 catalog:
+  '@base-ui/react': ^1.8.0
   '@storybook/react-vite': ^10.6.1
   '@tailwindcss/vite': ^4.3.3
   '@types/node': ^24.13.3
   '@types/react': ^19.2.18
   '@types/react-dom': ^19.2.7
   '@vitejs/plugin-react': ^6.1.1
+  lucide-react: ^1.51.0
   react: ^19.2.8
   react-dom: ^19.2.8
   storybook: ^10.6.1
