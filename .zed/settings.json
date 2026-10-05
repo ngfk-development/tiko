@@ -1,5 +1,6 @@
 {
   "load_direnv": "direct",
+  "file_scan_exclusions": ["**/pnpm-lock.yaml", "..."],
   "languages": {
     "CSS": {
       "language_servers": [
