@@ -16,6 +16,7 @@
   "dependencies": {
     "@base-ui/react": "catalog:",
     "@tanstack/react-router": "^1.170.41",
+    "@tiko/domain": "workspace:*",
     "@tiko/ui": "workspace:*",
     "lucide-react": "catalog:",
     "react": "catalog:",

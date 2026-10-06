@@ -289,6 +289,9 @@ importers:
       '@tanstack/react-router':
         specifier: ^1.170.41
         version: 1.170.41(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      '@tiko/domain':
+        specifier: workspace:*
+        version: link:../tiko-domain
       '@tiko/ui':
         specifier: workspace:*
         version: link:../tiko-ui
