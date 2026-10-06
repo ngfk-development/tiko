@@ -9,6 +9,7 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
+    "@storybook/addon-themes": "^10.6.1",
     "@storybook/react-vite": "catalog:",
     "@tailwindcss/vite": "catalog:",
     "@tiko/ui": "workspace:*",
