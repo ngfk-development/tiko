@@ -10,7 +10,10 @@
   },
   "overrides": [
     {
-      "files": ["packages/tiko-ui/src/components/ui/**"],
+      "files": [
+        "packages/tiko-ui/src/components/ui/**",
+        "packages/tiko-client/src/routes/**"
+      ],
       "rules": {
         "react/only-export-components": "off"
       }
