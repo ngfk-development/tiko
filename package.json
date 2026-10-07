@@ -3,6 +3,8 @@
   "type": "module",
   "scripts": {
     "build": "pnpm run -r --stream build",
+    "db:push": "pnpm --dir packages/tiko-server run db:push",
+    "db:reset": "pnpm --dir packages/tiko-server run db:reset",
     "dev": "pnpm run -r --parallel dev",
     "format": "pnpm run --sequential --no-bail \"/^format:.*/\"",
     "format:oxlint": "oxlint --fix .",
