@@ -19,6 +19,26 @@
       cwd = config.devenv.root;
       exec = "pnpm install";
     };
+
+    "tiko:db:push" = {
+      cwd = "${config.devenv.root}/packages/tiko-server";
+      after = [ "tiko:install" ];
+      # drizzle-kit exits 0 when it refuses a data-losing change without a terminal.
+      exec = ''
+        output=$(pnpm run db:push 2>&1)
+        status=$?
+        echo "$output"
+
+        if [ $status -ne 0 ]; then
+          exit $status
+        fi
+
+        if echo "$output" | grep -q "Interactive prompts require a TTY"; then
+          echo "This schema change needs confirmation. Run it in a terminal: pnpm --dir packages/tiko-server run db:push"
+          exit 1
+        fi
+      '';
+    };
   };
 
   processes = {
@@ -44,6 +64,7 @@
       after = [
         "tiko:install"
         "devenv:processes:postgres"
+        "tiko:db:push"
       ];
       env.FORCE_COLOR = "1";
       restart.on = "never";
