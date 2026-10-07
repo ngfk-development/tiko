@@ -21,8 +21,8 @@ function RootLayout() {
 
         <nav className="flex gap-4 text-sm">
           <Link
-            to="/integrations"
             className="text-muted-foreground [&.active]:text-foreground"
+            to="/integrations"
           >
             Integrations
           </Link>

@@ -17,9 +17,9 @@ const LOGOS: Record<Provider, string> = {
 };
 
 export interface ProviderIconProps {
+  className?: string;
   provider: Provider;
   size?: ProviderIconSize;
-  className?: string;
 }
 
 export function ProviderIcon(props: ProviderIconProps) {
@@ -36,12 +36,12 @@ export function ProviderIcon(props: ProviderIconProps) {
   if (failedProvider === provider) {
     return (
       <div
-        role="img"
         aria-label={name}
         className={cn(
           'bg-muted flex items-center justify-center font-medium',
           className,
         )}
+        role="img"
       >
         {name[0]}
       </div>
@@ -50,9 +50,9 @@ export function ProviderIcon(props: ProviderIconProps) {
 
   return (
     <img
+      alt={name}
       className={className}
       src={LOGOS[provider]}
-      alt={name}
       onError={() => setFailedProvider(provider)}
     />
   );

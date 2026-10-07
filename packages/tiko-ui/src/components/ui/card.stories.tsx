@@ -68,7 +68,7 @@ export const WithHeaderAction: Story = {
         <CardTitle>Card title</CardTitle>
         <CardDescription>A short description of the card.</CardDescription>
         <CardAction>
-          <Button variant="outline" size="sm">
+          <Button size="sm" variant="outline">
             Edit
           </Button>
         </CardAction>
