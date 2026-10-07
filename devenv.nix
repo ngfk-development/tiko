@@ -41,7 +41,10 @@
     server = {
       cwd = "${config.devenv.root}/packages/tiko-server";
       exec = "pnpm run dev";
-      after = [ "tiko:install" ];
+      after = [
+        "tiko:install"
+        "devenv:processes:postgres"
+      ];
       env.FORCE_COLOR = "1";
       restart.on = "never";
       ready = {
@@ -69,6 +72,26 @@
         initial_delay = 5;
       };
     };
+  };
+
+  services.postgres = {
+    enable = true;
+    package = pkgs.postgresql_18;
+    port = 5432;
+    listen_addresses = "localhost";
+    initialDatabases = [
+      {
+        name = "tiko";
+        user = "postgres";
+      }
+      {
+        name = "tiko_test";
+        user = "postgres";
+      }
+    ];
+    initialScript = ''
+      ALTER ROLE postgres WITH LOGIN PASSWORD 'postgres' SUPERUSER;
+    '';
   };
 
   scripts = {
