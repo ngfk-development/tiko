@@ -11,8 +11,8 @@ export type RequestLoggerOptions = {
   tracePaths?: string[];
 };
 
-export const requestLogger = ({ tracePaths = [] }: RequestLoggerOptions = {}) =>
-  createMiddleware<{
+export function requestLogger({ tracePaths = [] }: RequestLoggerOptions = {}) {
+  return createMiddleware<{
     Variables: RequestIdVariables & RequestLoggerVariables;
   }>(async (c, next) => {
     const log = logger.child({ reqId: c.var.requestId });
@@ -36,3 +36,4 @@ export const requestLogger = ({ tracePaths = [] }: RequestLoggerOptions = {}) =>
       'request completed',
     );
   });
+}
