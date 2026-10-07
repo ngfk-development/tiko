@@ -2,10 +2,8 @@ import { serve } from '@hono/node-server';
 
 import { app } from './app.ts';
 import { pool } from './db/db.ts';
+import { env } from './lib/env.ts';
 import { logger } from './lib/logger.ts';
-
-const hostname = process.env.HOSTNAME ?? 'localhost';
-const port = Number(process.env.PORT ?? 3000);
 
 try {
   await pool.query('select 1');
@@ -15,6 +13,6 @@ try {
   process.exit(1);
 }
 
-serve({ fetch: app.fetch, hostname, port }, (info) => {
-  logger.info(`Server listening at http://${hostname}:${info.port}`);
+serve({ fetch: app.fetch, hostname: env.HOSTNAME, port: env.PORT }, (info) => {
+  logger.info(`Server listening at http://${env.HOSTNAME}:${info.port}`);
 });
