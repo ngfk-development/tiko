@@ -12,6 +12,10 @@ const envSchema = z.object({
     .default('info'),
   NODE_ENV: z.enum(['development', 'production', 'test']).default('production'),
   PORT: z.coerce.number().int().positive().default(3000),
+  SEED_USER_EMAIL: z.email().optional(),
+  SEED_USER_FIRST_NAME: z.string().min(1).optional(),
+  SEED_USER_LAST_NAME: z.string().min(1).optional(),
+  SEED_USER_PASSWORD: z.string().min(1).optional(),
 });
 
 const result = envSchema.safeParse(process.env);
