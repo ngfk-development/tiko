@@ -1,7 +1,9 @@
 import { z } from 'zod';
 
+import { emailSchema } from '../users/email.ts';
+
 export const loginSchema = z.object({
-  email: z.email(),
+  email: emailSchema,
   password: z.string().min(1),
 });
 

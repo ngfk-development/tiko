@@ -43,6 +43,10 @@ describe('users table', () => {
     await expect(createUser({ email: user.email })).rejects.toThrow();
   });
 
+  it('rejects an email with capitals', async () => {
+    await expect(createUser({ email: 'Rick@example.com' })).rejects.toThrow();
+  });
+
   it('starts every test with an empty table', async () => {
     const rows = await db.select().from(users);
 

@@ -64,6 +64,16 @@ describe('POST /api/auth/login', () => {
     expect(res.status).toBe(200);
   });
 
+  it('ignores capitals and spaces around the email', async () => {
+    const passwordHash = await hashPassword('hunter2');
+    const user = await createUser({ passwordHash });
+    const email = ` ${user.email.toUpperCase()} `;
+
+    const res = await login({ email, password: 'hunter2' });
+
+    expect(res.status).toBe(200);
+  });
+
   it('rejects a wrong password with unauthorized', async () => {
     const passwordHash = await hashPassword('hunter2');
     const user = await createUser({ passwordHash });
