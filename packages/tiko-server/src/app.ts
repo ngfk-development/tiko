@@ -1,6 +1,7 @@
 import { Hono } from 'hono';
 import { requestId } from 'hono/request-id';
 
+import { authRoutes } from './features/auth/auth-routes.ts';
 import { healthRoutes } from './features/health/health-routes.ts';
 import { integrationRoutes } from './features/integrations/integration-routes.ts';
 import { errorHandler, notFoundHandler } from './middleware/error-handler.ts';
@@ -17,6 +18,7 @@ export function createApp() {
   app.notFound(notFoundHandler);
 
   return app
+    .route('/auth', authRoutes)
     .route('/health', healthRoutes)
     .route('/integrations', integrationRoutes);
 }
