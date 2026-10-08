@@ -36,9 +36,7 @@ export async function hashPassword(password: string) {
 
 export async function verifyPassword(password: string, hash: string) {
   const match = HASH_PATTERN.exec(hash);
-  if (!match) {
-    return false;
-  }
+  if (!match) return false;
 
   const [, memory, passes, parallelism, salt, key] = match;
   const expectedKey = Buffer.from(key, 'base64');

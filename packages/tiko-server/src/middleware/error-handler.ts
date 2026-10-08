@@ -13,6 +13,7 @@ import type { AppEnv } from '../types/app-env.ts';
 const COMMON_STATUS: Record<CommonErrorCode, ContentfulStatusCode> = {
   bad_request: 400,
   validation_failed: 400,
+  unauthorized: 401,
   not_found: 404,
   internal_server_error: 500,
 };
