@@ -10,7 +10,7 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
-    "db:push": "drizzle-kit push",
+    "db:push": "drizzle-kit push && DATABASE_NAME=tiko_test drizzle-kit push --force",
     "db:reset": "node scripts/db-reset.ts && drizzle-kit push",
     "dev": "node --watch src/index.ts",
     "start": "NODE_ENV=production node dist/index.js",

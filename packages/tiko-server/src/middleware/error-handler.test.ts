@@ -2,9 +2,11 @@ import { errorResponseSchema } from '@tiko/domain/errors';
 import { describe, expect, it } from 'vitest';
 import { z } from 'zod';
 
-import { app } from '../app.ts';
+import { createApp } from '../app.ts';
 import { AppError } from '../lib/app-error.ts';
 import { validate } from '../lib/validate.ts';
+
+const app = createApp();
 
 app
   .get('/test/common', () => {

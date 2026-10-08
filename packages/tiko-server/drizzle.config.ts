@@ -4,7 +4,7 @@ import { env } from './src/lib/env.ts';
 
 export default defineConfig({
   dialect: 'postgresql',
-  schema: './src/db/schema',
+  schema: './src/db/schema/!(*.test).ts',
   out: './drizzle',
   casing: 'snake_case',
   dbCredentials: {
